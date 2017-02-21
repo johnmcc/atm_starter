@@ -26,4 +26,21 @@ public class Atm {
     public int getMaxWithdrawal() {
         return maxWithdrawal;
     }
+
+    public int withdraw(int value) throws NotEnoughCashReservesException, GreaterThanMaxWithdrawalException {
+        if(value > cashReserves){
+            throw new NotEnoughCashReservesException("Not enough funds to proceed");
+        }
+
+        if(value > maxWithdrawal){
+            throw new GreaterThanMaxWithdrawalException("Maximum withdrawal amount is £" + maxWithdrawal);
+        }
+
+        cashReserves -= value;
+        return value;
+    }
+
+    public void fillUp() {
+        cashReserves = 1000;
+    }
 }
